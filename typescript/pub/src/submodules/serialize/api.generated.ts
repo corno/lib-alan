@@ -8,7 +8,7 @@ export namespace D {
 
 export namespace A {
     
-    export type serialize = <GAnnotation>() => g_this.SYNC.A.P.Serialize<GAnnotation>
+    export type serialize = () => g_this.SYNC.A.P.Serialize
 }
 
 export type API = {
