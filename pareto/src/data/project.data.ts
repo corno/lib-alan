@@ -14,6 +14,8 @@ import { $ as d_possiblyresolved } from "./submodules/possiblyresolved/module.da
 import { $ as d_resolve } from "./submodules/resolve/module.data"
 import { $ as d_serialize } from "./submodules/serialize/module.data"
 
+import { $ as d_liana2alan } from "./submodules/liana2alan/module.data"
+
 import { external, submodule, tempSubmodule, this_ } from "lib-pareto-typescript-project/dist/submodules/project/shorthands"
 
 
@@ -25,6 +27,7 @@ export const $: g_project.T.Project<pd.SourceLocation | null> = {
     'dependencies': d({
         "res-pareto-resolve": null,
         "lib-fountain-pen": null,
+        "lib-liana": null,
     }),
     'type': ['library', {
         'main': {
@@ -49,7 +52,10 @@ export const $: g_project.T.Project<pd.SourceLocation | null> = {
             "resolve": d_resolve,
             "serialize": d_serialize,
             "possiblyresolved": d_possiblyresolved,
+        
+            "liana2alan": d_liana2alan,
         }),
+        
         'bindings': [true, {
             'definition': d_bindings,
             'implementation': ['typescript', null],
@@ -57,6 +63,8 @@ export const $: g_project.T.Project<pd.SourceLocation | null> = {
         'executables': d({}),
         'test': {
             'dependencies': d({
+                "lib-liana": null,
+                "lib-fountain-pen": null,
             }),
             'definition': {
                 'glossary': {

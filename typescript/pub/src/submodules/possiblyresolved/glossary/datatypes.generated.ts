@@ -61,6 +61,29 @@ export namespace N {
                                                                 export namespace T {}
                                                             }
                                                             
+                                                            export namespace group {
+                                                                
+                                                                export namespace N {
+                                                                    
+                                                                    export namespace G {
+                                                                        
+                                                                        export namespace N {
+                                                                            
+                                                                            export namespace node {
+                                                                                
+                                                                                export namespace N {}
+                                                                                
+                                                                                export namespace T {}
+                                                                            }
+                                                                        }
+                                                                        
+                                                                        export namespace T {}
+                                                                    }
+                                                                }
+                                                                
+                                                                export namespace T {}
+                                                            }
+                                                            
                                                             export namespace state_$_$group {
                                                                 
                                                                 export namespace N {
@@ -218,25 +241,110 @@ export namespace N {
         
         export namespace N {
             
-            export namespace A {
+            export namespace G {
                 
                 export namespace N {
                     
-                    export namespace TU {
+                    export namespace selection_$_$steps {
                         
                         export namespace N {
                             
-                            export namespace dictionary {
+                            export namespace A {
                                 
                                 export namespace N {
                                     
-                                    export namespace G {
+                                    export namespace TU {
                                         
                                         export namespace N {
                                             
-                                            export namespace name {
+                                            export namespace dictionary {
                                                 
-                                                export namespace N {}
+                                                export namespace N {
+                                                    
+                                                    export namespace G {
+                                                        
+                                                        export namespace N {
+                                                            
+                                                            export namespace name {
+                                                                
+                                                                export namespace N {}
+                                                                
+                                                                export namespace T {}
+                                                            }
+                                                        }
+                                                        
+                                                        export namespace T {}
+                                                    }
+                                                }
+                                                
+                                                export namespace T {}
+                                            }
+                                            
+                                            export namespace group {
+                                                
+                                                export namespace N {
+                                                    
+                                                    export namespace G {
+                                                        
+                                                        export namespace N {
+                                                            
+                                                            export namespace name {
+                                                                
+                                                                export namespace N {}
+                                                                
+                                                                export namespace T {}
+                                                            }
+                                                        }
+                                                        
+                                                        export namespace T {}
+                                                    }
+                                                }
+                                                
+                                                export namespace T {}
+                                            }
+                                            
+                                            export namespace reference {
+                                                
+                                                export namespace N {
+                                                    
+                                                    export namespace G {
+                                                        
+                                                        export namespace N {
+                                                            
+                                                            export namespace name {
+                                                                
+                                                                export namespace N {}
+                                                                
+                                                                export namespace T {}
+                                                            }
+                                                        }
+                                                        
+                                                        export namespace T {}
+                                                    }
+                                                }
+                                                
+                                                export namespace T {}
+                                            }
+                                            
+                                            export namespace state_$_$constraint {
+                                                
+                                                export namespace N {
+                                                    
+                                                    export namespace G {
+                                                        
+                                                        export namespace N {
+                                                            
+                                                            export namespace name {
+                                                                
+                                                                export namespace N {}
+                                                                
+                                                                export namespace T {}
+                                                            }
+                                                        }
+                                                        
+                                                        export namespace T {}
+                                                    }
+                                                }
                                                 
                                                 export namespace T {}
                                             }
@@ -248,83 +356,22 @@ export namespace N {
                                 
                                 export namespace T {}
                             }
+                        }
+                        
+                        export namespace T {}
+                    }
+                    
+                    export namespace up_$_$steps {
+                        
+                        export namespace N {
                             
-                            export namespace group {
-                                
-                                export namespace N {
-                                    
-                                    export namespace G {
-                                        
-                                        export namespace N {
-                                            
-                                            export namespace name {
-                                                
-                                                export namespace N {}
-                                                
-                                                export namespace T {}
-                                            }
-                                        }
-                                        
-                                        export namespace T {}
-                                    }
-                                }
-                                
-                                export namespace T {}
-                            }
-                            
-                            export namespace parent {
+                            export namespace A {
                                 
                                 export namespace N {
                                     
                                     export namespace G {
                                         
                                         export namespace N {}
-                                        
-                                        export namespace T {}
-                                    }
-                                }
-                                
-                                export namespace T {}
-                            }
-                            
-                            export namespace reference {
-                                
-                                export namespace N {
-                                    
-                                    export namespace G {
-                                        
-                                        export namespace N {
-                                            
-                                            export namespace name {
-                                                
-                                                export namespace N {}
-                                                
-                                                export namespace T {}
-                                            }
-                                        }
-                                        
-                                        export namespace T {}
-                                    }
-                                }
-                                
-                                export namespace T {}
-                            }
-                            
-                            export namespace state_$_$constraint {
-                                
-                                export namespace N {
-                                    
-                                    export namespace G {
-                                        
-                                        export namespace N {
-                                            
-                                            export namespace name {
-                                                
-                                                export namespace N {}
-                                                
-                                                export namespace T {}
-                                            }
-                                        }
                                         
                                         export namespace T {}
                                     }
@@ -414,6 +461,15 @@ export namespace T {
                         readonly 'node': T.Node
                     }
                     
+                    export namespace group {
+                        
+                        export type node = T.Node
+                    }
+                    
+                    export type group = {
+                        readonly 'node': T.Node
+                    }
+                    
                     export namespace state__group {
                         
                         export namespace states {
@@ -495,6 +551,9 @@ export namespace T {
                         readonly 'key': string
                         readonly 'node': T.Node
                     }]
+                    | ['group', {
+                        readonly 'node': T.Node
+                    }]
                     | ['state group', {
                         readonly 'states': pt.Dictionary<{
                             readonly 'constraints': pt.Dictionary<{
@@ -514,6 +573,9 @@ export namespace T {
                 readonly 'type': 
                     | ['collection', {
                         readonly 'key': string
+                        readonly 'node': T.Node
+                    }]
+                    | ['group', {
                         readonly 'node': T.Node
                     }]
                     | ['state group', {
@@ -536,6 +598,9 @@ export namespace T {
             readonly 'type': 
                 | ['collection', {
                     readonly 'key': string
+                    readonly 'node': T.Node
+                }]
+                | ['group', {
                     readonly 'node': T.Node
                 }]
                 | ['state group', {
@@ -561,6 +626,9 @@ export namespace T {
                     readonly 'key': string
                     readonly 'node': T.Node
                 }]
+                | ['group', {
+                    readonly 'node': T.Node
+                }]
                 | ['state group', {
                     readonly 'states': pt.Dictionary<{
                         readonly 'constraints': pt.Dictionary<{
@@ -579,80 +647,104 @@ export namespace T {
     
     export namespace Path {
         
-        export namespace A {
+        export namespace selection__steps {
             
-            export namespace dictionary {
+            export namespace A {
                 
-                export type name = string
-            }
-            
-            export type dictionary = {
-                readonly 'name': string
-            }
-            
-            export namespace group {
+                export namespace dictionary {
+                    
+                    export type name = string
+                }
                 
-                export type name = string
-            }
-            
-            export type group = {
-                readonly 'name': string
-            }
-            
-            export namespace parent {}
-            
-            export type parent = null
-            
-            export namespace reference {
+                export type dictionary = {
+                    readonly 'name': string
+                }
                 
-                export type name = string
-            }
-            
-            export type reference = {
-                readonly 'name': string
-            }
-            
-            export namespace state__constraint {
+                export namespace group {
+                    
+                    export type name = string
+                }
                 
-                export type name = string
+                export type group = {
+                    readonly 'name': string
+                }
+                
+                export namespace reference {
+                    
+                    export type name = string
+                }
+                
+                export type reference = {
+                    readonly 'name': string
+                }
+                
+                export namespace state__constraint {
+                    
+                    export type name = string
+                }
+                
+                export type state__constraint = {
+                    readonly 'name': string
+                }
             }
             
-            export type state__constraint = {
-                readonly 'name': string
-            }
+            export type A = 
+                | ['dictionary', {
+                    readonly 'name': string
+                }]
+                | ['group', {
+                    readonly 'name': string
+                }]
+                | ['reference', {
+                    readonly 'name': string
+                }]
+                | ['state constraint', {
+                    readonly 'name': string
+                }]
         }
         
-        export type A = 
+        export type selection__steps = pt.Array<
             | ['dictionary', {
                 readonly 'name': string
             }]
             | ['group', {
                 readonly 'name': string
             }]
-            | ['parent', null]
             | ['reference', {
                 readonly 'name': string
             }]
             | ['state constraint', {
                 readonly 'name': string
             }]
+        >
+        
+        export namespace up__steps {
+            
+            export namespace A {}
+            
+            export type A = null
+        }
+        
+        export type up__steps = pt.Array<null>
     }
     
-    export type Path = pt.Array<
-        | ['dictionary', {
-            readonly 'name': string
-        }]
-        | ['group', {
-            readonly 'name': string
-        }]
-        | ['parent', null]
-        | ['reference', {
-            readonly 'name': string
-        }]
-        | ['state constraint', {
-            readonly 'name': string
-        }]
-    >
+    export type Path = {
+        readonly 'selection steps': pt.Array<
+            | ['dictionary', {
+                readonly 'name': string
+            }]
+            | ['group', {
+                readonly 'name': string
+            }]
+            | ['reference', {
+                readonly 'name': string
+            }]
+            | ['state constraint', {
+                readonly 'name': string
+            }]
+        >
+        readonly 'up steps': pt.Array<null>
+    }
     
     export namespace Root {
         

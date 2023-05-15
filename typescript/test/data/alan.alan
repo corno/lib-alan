@@ -1,0 +1,476 @@
+users
+    anonymous
+
+interfaces
+
+root {
+    'stamdata': group {
+        'gebruikers': collection ['ID'] {
+            'volledige naam': text
+            'ID': text
+        }
+        'balans': group {
+            'hoofdcategorieen fiscus': collection ['ID'] {
+                'zijde': stategroup (
+                    'activa' {}
+                    'passiva' {}
+                )
+                'subcategorieen': collection ['ID'] {
+                    'ID': text
+                }
+                'ID': text
+            }
+            'hoofdcategorieen': collection ['ID'] {
+                'zijde': stategroup (
+                    'activa' {}
+                    'passiva' {}
+                )
+                'subcategorieen': collection ['ID'] {
+                    'hoofdcategorie fiscus': text
+                    'subcategorie fiscus': text
+                    'ID': text
+                }
+                'ID': text
+            }
+            'grootboekrekeningen': collection ['ID'] {
+                'hoofdcategorie': text
+                'subcategorie': text
+                'zijde': stategroup (
+                    'activa' {}
+                    'passiva' {}
+                )
+                'ID': text
+            }
+        }
+        'resultaat': group {
+            'hoofdcategorieen fiscus': collection ['ID'] {
+                'zijde': stategroup (
+                    'kosten' {}
+                    'opbrengsten' {}
+                )
+                'subcategorieen': collection ['ID'] {
+                    'ID': text
+                }
+                'ID': text
+            }
+            'hoofdcategorieen': collection ['ID'] {
+                'zijde': stategroup (
+                    'kosten' {}
+                    'opbrengsten' {}
+                )
+                'subcategorieen': collection ['ID'] {
+                    'hoofdcategorie fiscus': text
+                    'subcategorie fiscus': text
+                    'ID': text
+                }
+                'ID': text
+            }
+            'correctietypes vennootschapsbelasting': collection ['ID'] {
+                'ID': text
+            }
+            'grootboekrekeningen': collection ['ID'] {
+                'hoofdcategorie': text
+                'subcategorie': text
+                'zijde': stategroup (
+                    'opbrengsten' {}
+                    'kosten' {
+                        'correctie op vennootschapsbelasting': stategroup (
+                            'nee' {}
+                            'ja' {
+                                'correctietype': text
+                            }
+                        )
+                    }
+                )
+                'ID': text
+            }
+        }
+        'BTW-categorieen': collection ['ID'] {
+            'BTW-heffing': stategroup (
+                'nee' {}
+                'ja' {
+                    'BTW-promillage': text
+                }
+            )
+            'ID': text
+        }
+        'klanten': collection ['ID'] {
+            'projecten': collection ['ID'] {
+                'offertes': collection ['ID'] {
+                    'opbrengsten': collection ['ID'] {
+                        'type': stategroup (
+                            'project' {
+                                'betaaldatum': text
+                                'bedrag': text
+                            }
+                        )
+                        'ID': text
+                    }
+                    'ID': text
+                }
+                'ID': text
+            }
+            'licentieovereenkomsten': collection ['ID'] {
+                'periodes': collection ['ID'] {
+                    'bedrag': text
+                    'ID': text
+                }
+                'ID': text
+            }
+            'ID': text
+        }
+        'medewerkers': collection ['ID'] {
+            'ID': text
+        }
+        'leveranciers': collection ['ID'] {
+            'ID': text
+        }
+        'bankrekeningen': collection ['ID'] {
+            'ID': text
+        }
+        'informele rekeningen': collection ['ID'] {
+            'ID': text
+        }
+    }
+    'overloop': group {
+        'jaren': collection ['ID'] {
+            'inkopen': collection ['ID'] {
+                'openstaand': text
+                'ID': text
+            }
+            'verkopen': collection ['ID'] {
+                'openstaand': text
+                'ID': text
+            }
+            'BTW periodes': collection ['ID'] {
+                'openstaand': text
+                'ID': text
+            }
+            'ID': text
+        }
+        'informele rekeningen': collection ['ID'] {
+            'eindsaldo': text
+            'ID': text
+        }
+        'overige balans items': collection ['ID'] {
+            'eindsaldo': text
+            'ID': text
+        }
+        'bankrekeningen': collection ['ID'] {
+            'eindsaldo': text
+            'ID': text
+        }
+    }
+    'jaarstamdata': group {
+        'balans grootboekrekeningen': collection ['ID'] {
+            'type': stategroup (
+                'bankrekening' {}
+                'informele rekening' {}
+                'overig' {}
+            )
+            'ID': text
+        }
+        'resultaat grootboekrekeningen': collection ['ID'] {
+            'ID': text
+        }
+        'informele rekeningen': collection ['ID'] {
+            'grootboekrekening': text
+            'beginsaldo': text
+            'nieuw': stategroup (
+                'nee' {
+                    'rekening': text
+                }
+                'ja' {}
+            )
+            'ID': text
+        }
+        'overige balans items': collection ['ID'] {
+            'beginsaldo': text
+            'grootboekrekening': text
+            'nieuw': stategroup (
+                'nee' {
+                    'balans item': text
+                }
+                'ja' {}
+            )
+            'ID': text
+        }
+        'startdatum boekjaar': text
+        'beginsaldo Winstreserve': text
+        'afgesloten': stategroup (
+            'nee' {}
+            'ja' {}
+        )
+        'grootboeken': group {
+            'resultaat dit jaar': text
+            'winstreserve': text
+            'BTW afrondingen': text
+            'beginsaldo nog aan te geven BTW': text
+            'nog aan te geven BTW': text
+            'inkoop saldo': text
+            'verkoop saldo': text
+            'BTW periode': text
+        }
+        'bankrekeningen': collection ['ID'] {
+            'beginsaldo': text
+            'nieuw': stategroup (
+                'nee' {
+                    'rekening': text
+                }
+                'ja' {}
+            )
+            'grootboekrekening': text
+            'ID': text
+        }
+    }
+    'boekingen': group {
+        'salarisrondes': collection ['ID'] {
+            'ID': text
+        }
+        'BTW periodes': collection ['ID'] {
+            'omschrijving': text
+            'status': stategroup (
+                'aangegeven' {
+                    'bedrag': text
+                    'afronding': text
+                    'datum': text
+                }
+                'openstaand' {}
+            )
+            '1. BTW-categorieen': collection ['ID'] {
+                'ID': text
+            }
+            'documenten': collection ['ID'] {
+                'bestand': text
+                'ID': text
+            }
+            'ID': text
+        }
+        'overige balans items': collection ['ID'] {
+            'memoriaal boekingen': collection ['ID'] {
+                'bedrag': text
+                'datum': text
+                'grootboekrekening': text
+                'omschrijving': text
+                'ID': text
+            }
+            'ID': text
+        }
+        'inkopen': collection ['ID'] {
+            'datum': text
+            'brondocument': stategroup (
+                'toegevoegd' {
+                    'x': text
+                }
+                'nog toevoegen' {}
+                'niet van toepassing' {}
+                'ontbreekt' {}
+            )
+            'type': stategroup (
+                'bonnetje' {}
+                'inkoop' {
+                    'crediteur': text
+                    'factuurnummer': text
+                }
+                'salaris' {
+                    'ronde': text
+                    'type': stategroup (
+                        'salaris' {
+                            'medewerker': text
+                        }
+                        'loonheffing' {}
+                        'wBSO' {}
+                    )
+                }
+            )
+            'BTW-regime': group {
+                'BTW-periode': text
+                'type': stategroup (
+                    'standaard' {}
+                    'geen BTW van toepassing' {}
+                    'binnenland heffing verlegd' {}
+                    'intracommunautair' {}
+                    'import van buiten de EU' {}
+                )
+            }
+            'afhandeling': stategroup (
+                'mutaties' {}
+                'rekening courant' {
+                    'x': text
+                }
+                'nog te betalen' {
+                    'betalingstermijn': text
+                }
+            )
+            'regels': collection ['ID'] {
+                'omschrijving': text
+                'bedrag': stategroup (
+                    'bekend' {
+                        'bedrag inclusief BTW': text
+                        'BTW': text
+                    }
+                    'nog niet bekend' {
+                        'aantekeningen': text
+                    }
+                )
+                'type': stategroup (
+                    'kosten' {
+                        'grootboekrekening': text
+                    }
+                    'balans' {
+                        'balans item': text
+                    }
+                )
+                'ID': text
+            }
+            'ID': text
+        }
+        'verkopen': collection ['ID'] {
+            'brondocument': stategroup (
+                'nog toevoegen' {}
+                'toegevoegd' {
+                    'document': text
+                }
+            )
+            'betalingstermijn': text
+            'debiteur': text
+            'BTW-periode': text
+            'contracttype': stategroup (
+                'licentieovereenkomst' {
+                    'overeenkomst': text
+                }
+                'project' {
+                    'project': text
+                    'offerte': text
+                }
+            )
+            'afhandeling': stategroup (
+                'mutaties' {}
+                'rekening courant' {
+                    'rekening courant': text
+                }
+            )
+            'regels': collection ['ID'] {
+                'omschrijving': text
+                'bedrag exclusief BTW': text
+                'type': stategroup (
+                    'opbrengsten' {
+                        'grootboekrekening': text
+                    }
+                    'balans' {
+                        'balans item': text
+                    }
+                )
+                'BTW-regime': stategroup (
+                    'standaard' {
+                        'BTW-cateogrie': text
+                    }
+                    'binnenland heffing verlegd' {}
+                    'intracommunautair' {}
+                    'export buiten de EU' {}
+                    'installatie of afstandsverkopen binnen de EU' {}
+                )
+                'contracttype2': stategroup (
+                    'los' {}
+                    'licentieovereenkomst' {
+                        'periode': text
+                    }
+                    'project' {
+                        'opbrengst': text
+                    }
+                )
+                'ID': text
+            }
+            'ID': text
+        }
+    }
+    'afhandeling': group {
+        'verrekenposten': collection ['ID'] {
+            'mutaties': collection ['ID'] {
+                'bedrag': text
+                'afhandeling': stategroup (
+                    'overloop' {
+                        'jaar': text
+                        'type': stategroup (
+                            'inkoop' {
+                                'x': text
+                            }
+                            'verkoop' {
+                                'x': text
+                            }
+                            'BTW-periode' {
+                                'x': text
+                            }
+                        )
+                    }
+                    'inkoop' {
+                        'x': text
+                    }
+                    'verkoop' {
+                        'x': text
+                    }
+                    'BTW-periode' {
+                        'x': text
+                    }
+                    'informele rekening' {
+                        'x': text
+                    }
+                )
+                'ID': text
+            }
+            'ID': text
+        }
+        'bankrekeningen': collection ['ID'] {
+            'mutaties': collection ['ID'] {
+                'omschrijving': text
+                'bedrag': text
+                'datum': text
+                'status': stategroup (
+                    'nog te verwerken' {}
+                    'verwerkt' {
+                        'afhandeling': stategroup (
+                            'alg' {
+                                'x': stategroup (
+                                    'overloop' {
+                                        'jaar': text
+                                        'type': stategroup (
+                                            'inkoop' {
+                                                'x': text
+                                            }
+                                            'verkoop' {
+                                                'x': text
+                                            }
+                                            'BTW-periode' {
+                                                'x': text
+                                            }
+                                        )
+                                    }
+                                    'inkoop' {
+                                        'x': text
+                                    }
+                                    'verkoop' {
+                                        'x': text
+                                    }
+                                    'BTW-periode' {
+                                        'x': text
+                                    }
+                                    'informele rekening' {
+                                        'x': text
+                                    }
+                                )
+                            }
+                            'verrekenpost' {
+                                'x': text
+                            }
+                        )
+                    }
+                )
+                'ID': text
+            }
+            'ID': text
+        }
+    }
+}
+
+numerical-types
+    'number'

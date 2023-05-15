@@ -1,0 +1,70 @@
+users
+	anonymous
+
+interfaces
+
+root {
+	'A Number': number 'bedrag'
+	'A Group': group {
+		'A child': number 'bedrag'
+	}
+	'A Dictionary': collection ['Bla'] {
+		'A Nested Dictionary': collection ['ID'] {
+			'ID': text
+		}
+		'Bla': text
+		'Flup': stategroup (
+			'First' {
+				'X': text
+			}
+			'Second' { }
+		)
+	}
+	'A Nondense Dictionary': collection ['ID'] {
+		'ID': text -> ^ . 'A Dictionary' []
+	}
+	'Y': stategroup (
+		'A' {
+			'X': text -> ^ . 'A Dictionary' []
+			'Z': text -> > 'X' . 'A Nested Dictionary' []
+		}
+		'B' {
+			'A Dictionary 3': collection ['ID'] {
+				'ID': text
+			}
+		}
+	)
+	'State Group with constrained State': stategroup (
+		'A' {
+		}
+		'B' where 'My State Constraint' -> . 'Y' ? 'B' {
+			'Reference dependent on state constraint': text -> .& 'My State Constraint' . 'A Dictionary 3' []
+		}
+	)
+	'A Dictionary 2': collection ['ID'] {
+		'ID': text
+		'State Group with Result': stategroup (
+			'A' {
+				'X': text -> ^ ^ . 'A Dictionary' []
+			}
+			'B' {
+				'X': text -> ^ ^ . 'A Dictionary' []
+			}
+		)
+		'Derived Reference': text -> ^ . 'A Dictionary' [] = switch . 'State Group with Result' (
+			| 'A' as $ => $ > 'X'
+			| 'B' as $ => $ > 'X'
+		)
+		'Dependent Reference': text ~> > 'Derived Reference' . 'A Nested Dictionary' []
+		'Does Dependent Reference Exist': stategroup = switch > 'Dependent Reference' (
+			| node => 'Yes' ( )
+			| none => 'No' ( )
+		) (
+			'Yes' { }
+			'No' { }
+		)
+	}
+}
+
+numerical-types
+	'bedrag'

@@ -10,7 +10,10 @@ import { A } from "../api.generated"
 export const $$: A.serialize = () => {
     return ($, $i) => {
         function serialize_Path($: g_in.T.Path, $i: g_fp.SYNC.I.Line) {
-            $.__forEach(($) => {
+            $['up steps'].__forEach(($) => {
+                $i.snippet(` ^`)
+            })
+            $['selection steps'].__forEach(($) => {
                 switch ($[0]) {
                     case 'dictionary':
                         pl.ss($, ($) => {
@@ -20,12 +23,6 @@ export const $$: A.serialize = () => {
                     case 'group':
                         pl.ss($, ($) => {
                             $i.snippet(` . '${$.name}'`)
-                        })
-                        break
-                    case 'parent':
-                        pl.ss($, ($) => {
-                            $i.snippet(` ^`)
-
                         })
                         break
                     case 'reference':
@@ -53,6 +50,12 @@ export const $$: A.serialize = () => {
                                 case 'collection':
                                     pl.ss($, ($) => {
                                         $i.snippet(`collection ['${$.key}'] `)
+                                        serialize_Node($.node, $i)
+                                    })
+                                    break
+                                case 'group':
+                                    pl.ss($, ($) => {
+                                        $i.snippet(`group `)
                                         serialize_Node($.node, $i)
                                     })
                                     break
@@ -107,10 +110,9 @@ export const $$: A.serialize = () => {
             $i.snippet(`numerical-types`)
             $i.indent(($i) => {
                 $['numerical types'].__forEach(() => false, ($, key) => {
-                    $i.line(`${key}`)
+                    $i.line(`'${key}'`)
                 })
             })
         })
-        pd.implementMe(`IMPLEMENT serialize`)
     }
 }

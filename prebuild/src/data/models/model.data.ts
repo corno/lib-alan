@@ -36,6 +36,9 @@ export const $: g_pareto_lang_data.T.Type__Library<pd.SourceLocation> = {
                         "node": prop(component(typeRef("Node", true))),
                         "key": prop(atom("identifier")),
                     })),
+                    "group": state(group({
+                        "node": prop(component(typeRef("Node", true))),
+                    })),
                     "text": state(group({
                         "constraint": prop(optional(group({
                             "path": prop(component(typeRef("Path", true))),
@@ -52,21 +55,23 @@ export const $: g_pareto_lang_data.T.Type__Library<pd.SourceLocation> = {
                 }))
             })))
         })),
-        "Path": globalType(array(stateGroup({
-            "parent": state(group({})),
-            "dictionary": state(group({
-                "name": prop(atom("identifier")),
-            })),
-            "group": state(group({
-                "name": prop(atom("identifier")),
-            })),
-            "state constraint": state(group({
-                "name": prop(atom("identifier")),
-            })),
-            "reference": state(group({
-                "name": prop(atom("identifier")),
-            })),
-        }))),
+        "Path": globalType(group({
+            "up steps": prop(array(group({}))),
+            "selection steps": prop(array(stateGroup({
+                "dictionary": state(group({
+                    "name": prop(atom("identifier")),
+                })),
+                "group": state(group({
+                    "name": prop(atom("identifier")),
+                })),
+                "state constraint": state(group({
+                    "name": prop(atom("identifier")),
+                })),
+                "reference": state(group({
+                    "name": prop(atom("identifier")),
+                })),
+            })))
+        })),
         "Root": globalType(group({
             "numerical types": prop(dictionary(group({
 

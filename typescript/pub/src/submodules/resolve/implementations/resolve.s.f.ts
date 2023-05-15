@@ -80,6 +80,11 @@ export const $$: A.resolve = <Annotation>($d: D.resolve<Annotation>, $se: {
                                     'node': resolve_Node($.node),
                                 }]
                             })
+                            case 'group': return pl.ss($, ($) => {
+                                return ['group', {
+                                    'node': resolve_Node($.node),
+                                }]
+                            })
                             case 'state group': return pl.ss($, ($) => {
                                 return ['state group', {
                                     'states': $.states.dictionary.map(($) => {
