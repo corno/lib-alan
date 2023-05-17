@@ -182,6 +182,13 @@ export namespace N {
                                                                                                 
                                                                                                 export namespace N {
                                                                                                     
+                                                                                                    export namespace dictionary {
+                                                                                                        
+                                                                                                        export namespace N {}
+                                                                                                        
+                                                                                                        export namespace T {}
+                                                                                                    }
+                                                                                                    
                                                                                                     export namespace path {
                                                                                                         
                                                                                                         export namespace N {}
@@ -245,6 +252,60 @@ export namespace N {
                 
                 export namespace N {
                     
+                    export namespace context {
+                        
+                        export namespace N {
+                            
+                            export namespace TU {
+                                
+                                export namespace N {
+                                    
+                                    export namespace sibling {
+                                        
+                                        export namespace N {
+                                            
+                                            export namespace G {
+                                                
+                                                export namespace N {}
+                                                
+                                                export namespace T {}
+                                            }
+                                        }
+                                        
+                                        export namespace T {}
+                                    }
+                                    
+                                    export namespace state_$_$constraint {
+                                        
+                                        export namespace N {
+                                            
+                                            export namespace G {
+                                                
+                                                export namespace N {
+                                                    
+                                                    export namespace name {
+                                                        
+                                                        export namespace N {}
+                                                        
+                                                        export namespace T {}
+                                                    }
+                                                }
+                                                
+                                                export namespace T {}
+                                            }
+                                        }
+                                        
+                                        export namespace T {}
+                                    }
+                                }
+                                
+                                export namespace T {}
+                            }
+                        }
+                        
+                        export namespace T {}
+                    }
+                    
                     export namespace selection_$_$steps {
                         
                         export namespace N {
@@ -256,29 +317,6 @@ export namespace N {
                                     export namespace TU {
                                         
                                         export namespace N {
-                                            
-                                            export namespace dictionary {
-                                                
-                                                export namespace N {
-                                                    
-                                                    export namespace G {
-                                                        
-                                                        export namespace N {
-                                                            
-                                                            export namespace name {
-                                                                
-                                                                export namespace N {}
-                                                                
-                                                                export namespace T {}
-                                                            }
-                                                        }
-                                                        
-                                                        export namespace T {}
-                                                    }
-                                                }
-                                                
-                                                export namespace T {}
-                                            }
                                             
                                             export namespace group {
                                                 
@@ -526,21 +564,26 @@ export namespace T {
                             
                             export namespace O {
                                 
+                                export type dictionary = string
+                                
                                 export type path = T.Path
                             }
                             
                             export type O = {
+                                readonly 'dictionary': string
                                 readonly 'path': T.Path
                             }
                         }
                         
                         export type constraint = [ false ] | [ true, {
+                            readonly 'dictionary': string
                             readonly 'path': T.Path
                         }]
                     }
                     
                     export type text = {
                         readonly 'constraint': [ false ] | [ true, {
+                            readonly 'dictionary': string
                             readonly 'path': T.Path
                         }]
                     }
@@ -564,6 +607,7 @@ export namespace T {
                     }]
                     | ['text', {
                         readonly 'constraint': [ false ] | [ true, {
+                            readonly 'dictionary': string
                             readonly 'path': T.Path
                         }]
                     }]
@@ -588,6 +632,7 @@ export namespace T {
                     }]
                     | ['text', {
                         readonly 'constraint': [ false ] | [ true, {
+                            readonly 'dictionary': string
                             readonly 'path': T.Path
                         }]
                     }]
@@ -613,6 +658,7 @@ export namespace T {
                 }]
                 | ['text', {
                     readonly 'constraint': [ false ] | [ true, {
+                        readonly 'dictionary': string
                         readonly 'path': T.Path
                     }]
                 }]
@@ -639,6 +685,7 @@ export namespace T {
                 }]
                 | ['text', {
                     readonly 'constraint': [ false ] | [ true, {
+                        readonly 'dictionary': string
                         readonly 'path': T.Path
                     }]
                 }]
@@ -647,18 +694,31 @@ export namespace T {
     
     export namespace Path {
         
+        export namespace context {
+            
+            export namespace sibling {}
+            
+            export type sibling = null
+            
+            export namespace state__constraint {
+                
+                export type name = string
+            }
+            
+            export type state__constraint = {
+                readonly 'name': string
+            }
+        }
+        
+        export type context = 
+            | ['sibling', null]
+            | ['state constraint', {
+                readonly 'name': string
+            }]
+        
         export namespace selection__steps {
             
             export namespace A {
-                
-                export namespace dictionary {
-                    
-                    export type name = string
-                }
-                
-                export type dictionary = {
-                    readonly 'name': string
-                }
                 
                 export namespace group {
                     
@@ -689,9 +749,6 @@ export namespace T {
             }
             
             export type A = 
-                | ['dictionary', {
-                    readonly 'name': string
-                }]
                 | ['group', {
                     readonly 'name': string
                 }]
@@ -704,9 +761,6 @@ export namespace T {
         }
         
         export type selection__steps = pt.Array<
-            | ['dictionary', {
-                readonly 'name': string
-            }]
             | ['group', {
                 readonly 'name': string
             }]
@@ -729,10 +783,12 @@ export namespace T {
     }
     
     export type Path = {
-        readonly 'selection steps': pt.Array<
-            | ['dictionary', {
+        readonly 'context': 
+            | ['sibling', null]
+            | ['state constraint', {
                 readonly 'name': string
             }]
+        readonly 'selection steps': pt.Array<
             | ['group', {
                 readonly 'name': string
             }]

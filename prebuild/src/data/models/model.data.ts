@@ -42,6 +42,7 @@ export const $: g_pareto_lang_data.T.Type__Library<pd.SourceLocation> = {
                     "text": state(group({
                         "constraint": prop(optional(group({
                             "path": prop(component(typeRef("Path", true))),
+                            "dictionary": prop(atom("identifier"))
                         }))),
                     })),
                     "state group": state(group({
@@ -57,10 +58,16 @@ export const $: g_pareto_lang_data.T.Type__Library<pd.SourceLocation> = {
         })),
         "Path": globalType(group({
             "up steps": prop(array(group({}))),
-            "selection steps": prop(array(stateGroup({
-                "dictionary": state(group({
+            "context": prop(stateGroup({
+                "sibling": state(group({})),
+                "state constraint": state(group({
                     "name": prop(atom("identifier")),
                 })),
+            })),
+            "selection steps": prop(array(stateGroup({
+                // "dictionary": state(group({
+                //     "name": prop(atom("identifier")),
+                // })),
                 "group": state(group({
                     "name": prop(atom("identifier")),
                 })),

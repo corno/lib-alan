@@ -105,7 +105,8 @@ export const $$: A.resolve = <Annotation>($d: D.resolve<Annotation>, $se: {
                                         $.constraint,
                                         ($) => {
                                             return {
-                                                'path': resolve_Path($.path)
+                                                'path': resolve_Path($.path),
+                                                'dictionary': $.dictionary
                                             }
                                         },
                                     )

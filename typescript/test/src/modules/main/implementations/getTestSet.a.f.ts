@@ -7,6 +7,7 @@ import * as a_pub from "../../../../../pub"
 import * as a_l2a from "../../../../../pub/dist/submodules/liana2alan"
 
 import * as a_dictionary from "res-pareto-dictionary"
+import * as a_array from "res-pareto-array"
 import * as a_liana from "lib-liana"
 import * as a_fp from "lib-fountain-pen"
 
@@ -22,7 +23,8 @@ export const $$: A.getTestSet = ($) => {
     })
 
     const alanAccountingUnresolved = a_l2a.$a.map({
-        'addEntry': a_dictionary.$r.unsafeAddEntry()
+        'addEntry': a_dictionary.$r.unsafeAddEntry(),
+        'push': a_array.$r.push(),
     })(resolved)
 
     const alanAccounting = a_pub.$b.resolve()(alanAccountingUnresolved)

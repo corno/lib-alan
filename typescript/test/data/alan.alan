@@ -26,15 +26,15 @@ root {
                     'passiva' {}
                 )
                 'subcategorieen': collection ['ID'] {
-                    'hoofdcategorie fiscus': text
-                    'subcategorie fiscus': text
+                    'hoofdcategorie fiscus': text -> ^ ^ ^ ^ . 'hoofdcategorieen fiscus' []
+                    'subcategorie fiscus': text -> > 'hoofdcategorie fiscus' . 'subcategorieen' []
                     'ID': text
                 }
                 'ID': text
             }
             'grootboekrekeningen': collection ['ID'] {
-                'hoofdcategorie': text
-                'subcategorie': text
+                'hoofdcategorie': text -> ^ ^ . 'hoofdcategorieen' []
+                'subcategorie': text -> > 'hoofdcategorie' . 'subcategorieen' []
                 'zijde': stategroup (
                     'activa' {}
                     'passiva' {}
@@ -59,8 +59,8 @@ root {
                     'opbrengsten' {}
                 )
                 'subcategorieen': collection ['ID'] {
-                    'hoofdcategorie fiscus': text
-                    'subcategorie fiscus': text
+                    'hoofdcategorie fiscus': text -> ^ ^ ^ ^ . 'hoofdcategorieen fiscus' []
+                    'subcategorie fiscus': text -> > 'hoofdcategorie fiscus' . 'subcategorieen' []
                     'ID': text
                 }
                 'ID': text
@@ -69,15 +69,15 @@ root {
                 'ID': text
             }
             'grootboekrekeningen': collection ['ID'] {
-                'hoofdcategorie': text
-                'subcategorie': text
+                'hoofdcategorie': text -> ^ ^ . 'hoofdcategorieen' []
+                'subcategorie': text -> > 'hoofdcategorie' . 'subcategorieen' []
                 'zijde': stategroup (
                     'opbrengsten' {}
                     'kosten' {
                         'correctie op vennootschapsbelasting': stategroup (
                             'nee' {}
                             'ja' {
-                                'correctietype': text
+                                'correctietype': text -> ^ ^ ^ ^ ^ ^ . 'correctietypes vennootschapsbelasting' []
                             }
                         )
                     }
@@ -174,11 +174,11 @@ root {
             'ID': text
         }
         'informele rekeningen': collection ['ID'] {
-            'grootboekrekening': text
+            'grootboekrekening': text -> ^ ^ . 'balans grootboekrekeningen' []
             'beginsaldo': text
             'nieuw': stategroup (
                 'nee' {
-                    'rekening': text
+                    'rekening': text -> ^ ^ ^ ^ ^ . 'informele rekeningen' []
                 }
                 'ja' {}
             )
@@ -186,10 +186,10 @@ root {
         }
         'overige balans items': collection ['ID'] {
             'beginsaldo': text
-            'grootboekrekening': text
+            'grootboekrekening': text -> ^ ^ . 'balans grootboekrekeningen' []
             'nieuw': stategroup (
                 'nee' {
-                    'balans item': text
+                    'balans item': text -> ^ ^ ^ ^ ^ . 'overige balans items' []
                 }
                 'ja' {}
             )
@@ -202,24 +202,24 @@ root {
             'ja' {}
         )
         'grootboeken': group {
-            'resultaat dit jaar': text
-            'winstreserve': text
-            'BTW afrondingen': text
-            'beginsaldo nog aan te geven BTW': text
-            'nog aan te geven BTW': text
-            'inkoop saldo': text
-            'verkoop saldo': text
-            'BTW periode': text
+            'resultaat dit jaar': text -> ^ . 'resultaat grootboekrekeningen' []
+            'winstreserve': text -> ^ . 'balans grootboekrekeningen' []
+            'BTW afrondingen': text -> ^ . 'resultaat grootboekrekeningen' []
+            'beginsaldo nog aan te geven BTW': text -> ^ . 'balans grootboekrekeningen' []
+            'nog aan te geven BTW': text -> ^ . 'balans grootboekrekeningen' []
+            'inkoop saldo': text -> ^ . 'balans grootboekrekeningen' []
+            'verkoop saldo': text -> ^ . 'balans grootboekrekeningen' []
+            'BTW periode': text -> ^ . 'balans grootboekrekeningen' []
         }
         'bankrekeningen': collection ['ID'] {
             'beginsaldo': text
             'nieuw': stategroup (
                 'nee' {
-                    'rekening': text
+                    'rekening': text -> ^ ^ ^ ^ ^ . 'bankrekeningen' []
                 }
                 'ja' {}
             )
-            'grootboekrekening': text
+            'grootboekrekening': text -> ^ ^ . 'balans grootboekrekeningen' []
             'ID': text
         }
     }
@@ -250,7 +250,7 @@ root {
             'memoriaal boekingen': collection ['ID'] {
                 'bedrag': text
                 'datum': text
-                'grootboekrekening': text
+                'grootboekrekening': text -> ^ ^ ^ ^ ^ . 'balans grootboekrekeningen' []
                 'omschrijving': text
                 'ID': text
             }
@@ -269,14 +269,14 @@ root {
             'type': stategroup (
                 'bonnetje' {}
                 'inkoop' {
-                    'crediteur': text
+                    'crediteur': text -> ^ ^ ^ ^ ^ . 'leveranciers' []
                     'factuurnummer': text
                 }
                 'salaris' {
-                    'ronde': text
+                    'ronde': text -> ^ ^ ^ ^ . 'salarisrondes' []
                     'type': stategroup (
                         'salaris' {
-                            'medewerker': text
+                            'medewerker': text -> ^ ^ ^ ^ ^ ^ ^ . 'medewerkers' []
                         }
                         'loonheffing' {}
                         'wBSO' {}
@@ -284,7 +284,7 @@ root {
                 }
             )
             'BTW-regime': group {
-                'BTW-periode': text
+                'BTW-periode': text -> ^ ^ ^ . 'BTW periodes' []
                 'type': stategroup (
                     'standaard' {}
                     'geen BTW van toepassing' {}
@@ -296,7 +296,7 @@ root {
             'afhandeling': stategroup (
                 'mutaties' {}
                 'rekening courant' {
-                    'x': text
+                    'x': text -> ^ ^ ^ ^ . 'informele rekeningen' []
                 }
                 'nog te betalen' {
                     'betalingstermijn': text
@@ -315,10 +315,10 @@ root {
                 )
                 'type': stategroup (
                     'kosten' {
-                        'grootboekrekening': text
+                        'grootboekrekening': text -> ^ ^ ^ ^ ^ ^ ^ . 'resultaat grootboekrekeningen' []
                     }
                     'balans' {
-                        'balans item': text
+                        'balans item': text -> ^ ^ ^ ^ ^ ^ ^ . 'overige balans items' []
                     }
                 )
                 'ID': text
@@ -333,21 +333,21 @@ root {
                 }
             )
             'betalingstermijn': text
-            'debiteur': text
-            'BTW-periode': text
+            'debiteur': text -> ^ ^ ^ . 'klanten' []
+            'BTW-periode': text -> ^ ^ . 'BTW periodes' []
             'contracttype': stategroup (
                 'licentieovereenkomst' {
-                    'overeenkomst': text
+                    'overeenkomst': text -> ^ ^ > 'debiteur' . 'licentieovereenkomsten' []
                 }
                 'project' {
-                    'project': text
-                    'offerte': text
+                    'project': text -> ^ ^ > 'debiteur' . 'projecten' []
+                    'offerte': text -> > 'debiteur' > 'project' . 'offertes' []
                 }
             )
             'afhandeling': stategroup (
                 'mutaties' {}
                 'rekening courant' {
-                    'rekening courant': text
+                    'rekening courant': text -> ^ ^ ^ ^ ^ . 'informele rekeningen' []
                 }
             )
             'regels': collection ['ID'] {
@@ -355,15 +355,15 @@ root {
                 'bedrag exclusief BTW': text
                 'type': stategroup (
                     'opbrengsten' {
-                        'grootboekrekening': text
+                        'grootboekrekening': text -> ^ ^ ^ ^ ^ ^ ^ . 'resultaat grootboekrekeningen' []
                     }
                     'balans' {
-                        'balans item': text
+                        'balans item': text -> ^ ^ ^ ^ ^ ^ ^ . 'overige balans items' []
                     }
                 )
                 'BTW-regime': stategroup (
                     'standaard' {
-                        'BTW-cateogrie': text
+                        'BTW-cateogrie': text -> ^ ^ ^ ^ > 'BTW-periode' . '1. BTW-categorieen' []
                     }
                     'binnenland heffing verlegd' {}
                     'intracommunautair' {}
@@ -373,10 +373,10 @@ root {
                 'contracttype2': stategroup (
                     'los' {}
                     'licentieovereenkomst' {
-                        'periode': text
+                        'periode': text -> ^ .& 'parent' . 'periodes' []
                     }
                     'project' {
-                        'opbrengst': text
+                        'opbrengst': text -> ^ .& 'parent' . 'opbrengsten' []
                     }
                 )
                 'ID': text
@@ -390,30 +390,30 @@ root {
                 'bedrag': text
                 'afhandeling': stategroup (
                     'overloop' {
-                        'jaar': text
+                        'jaar': text -> ^ ^ . 'jaren' []
                         'type': stategroup (
                             'inkoop' {
-                                'x': text
+                                'x': text -> ^ > 'jaar' . 'inkopen' []
                             }
                             'verkoop' {
-                                'x': text
+                                'x': text -> ^ > 'jaar' . 'verkopen' []
                             }
                             'BTW-periode' {
-                                'x': text
+                                'x': text -> ^ > 'jaar' . 'BTW periodes' []
                             }
                         )
                     }
                     'inkoop' {
-                        'x': text
+                        'x': text -> ^ . 'inkopen' []
                     }
                     'verkoop' {
-                        'x': text
+                        'x': text -> ^ . 'verkopen' []
                     }
                     'BTW-periode' {
-                        'x': text
+                        'x': text -> ^ . 'BTW periodes' []
                     }
                     'informele rekening' {
-                        'x': text
+                        'x': text -> ^ . 'informele rekeningen' []
                     }
                 )
                 'ID': text
@@ -432,35 +432,35 @@ root {
                             'alg' {
                                 'x': stategroup (
                                     'overloop' {
-                                        'jaar': text
+                                        'jaar': text -> ^ ^ . 'jaren' []
                                         'type': stategroup (
                                             'inkoop' {
-                                                'x': text
+                                                'x': text -> ^ > 'jaar' . 'inkopen' []
                                             }
                                             'verkoop' {
-                                                'x': text
+                                                'x': text -> ^ > 'jaar' . 'verkopen' []
                                             }
                                             'BTW-periode' {
-                                                'x': text
+                                                'x': text -> ^ > 'jaar' . 'BTW periodes' []
                                             }
                                         )
                                     }
                                     'inkoop' {
-                                        'x': text
+                                        'x': text -> ^ . 'inkopen' []
                                     }
                                     'verkoop' {
-                                        'x': text
+                                        'x': text -> ^ . 'verkopen' []
                                     }
                                     'BTW-periode' {
-                                        'x': text
+                                        'x': text -> ^ . 'BTW periodes' []
                                     }
                                     'informele rekening' {
-                                        'x': text
+                                        'x': text -> ^ . 'informele rekeningen' []
                                     }
                                 )
                             }
                             'verrekenpost' {
-                                'x': text
+                                'x': text -> ^ ^ ^ ^ ^ ^ ^ . 'verrekenposten' []
                             }
                         )
                     }

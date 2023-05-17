@@ -25,7 +25,7 @@ export const $: g_project.T.Module<pd.SourceLocation> = {
             'root': api,
             'imports': d({
 
-                // "array": external("res-pareto-array"),
+                "array": external("res-pareto-array"),
                 // "build": external("res-pareto-build"),
                 //"resolve": external("res-pareto-resolve"),
                 "dictionary": external("res-pareto-dictionary"),

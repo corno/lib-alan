@@ -13,13 +13,24 @@ export const $$: A.serialize = () => {
             $['up steps'].__forEach(($) => {
                 $i.snippet(` ^`)
             })
-            $['selection steps'].__forEach(($) => {
+            pl.cc($.context, ($) => {
                 switch ($[0]) {
-                    case 'dictionary':
+                    case 'sibling':
                         pl.ss($, ($) => {
-                            $i.snippet(` . '${$.name}' []`)
+
                         })
                         break
+                    case 'state constraint':
+                        pl.ss($, ($) => {
+                            $i.snippet(` .& '${$.name}'`)
+                        })
+                        break
+                    default: pl.au($[0])
+                }
+            })
+            $['selection steps'].__forEach(($) => {
+                switch ($[0]) {
+
                     case 'group':
                         pl.ss($, ($) => {
                             $i.snippet(` . '${$.name}'`)
@@ -79,8 +90,9 @@ export const $$: A.serialize = () => {
                                         pl.optional(
                                             $.constraint,
                                             ($) => {
-                                                $i.snippet(` -> `)
+                                                $i.snippet(` ->`)
                                                 serialize_Path($.path, $i)
+                                                $i.snippet(` . '${$.dictionary}' []`)
                                             },
                                             () => { }
                                         )

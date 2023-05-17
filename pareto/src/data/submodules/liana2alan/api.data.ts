@@ -22,6 +22,7 @@ export const $: g_project.T.ModuleDefinition.api.root<pd.SourceLocation> = {
             // "isEmpty": sfunction("dictionary", {}, "IsEmpty"),
             // "merge": sfunction("array", {}, "Merge"),
             "addEntry": sfunction("dictionary", {}, "UnsafeAddEntry"),
+            "push": sfunction("array", {}, "Push"),
         }, {})),
     }),
 }
