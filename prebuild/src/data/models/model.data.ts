@@ -20,15 +20,16 @@ import {
     lookupReference,
     dictionaryReference,
     atom,
+    typeLibrary,
 } from "lib-pareto-lang-data/dist/submodules/unresolved/shorthands"
 
-export const $: g_pareto_lang_data.T.Type__Library<pd.SourceLocation> = {
-    'imports': pd.d({
-    }),
-    'atom types': pd.d({
+export const $: g_pareto_lang_data.T.Type__Library<pd.SourceLocation> = typeLibrary(
+    {
+    },
+    {
         "identifier": null,
-    }),
-    'global types': pd.d({
+    },
+    {
         "Node": globalType(group({
             "properties": prop(dictionary(group({
                 "type": prop(stateGroup({
@@ -85,5 +86,5 @@ export const $: g_pareto_lang_data.T.Type__Library<pd.SourceLocation> = {
             }))),
             "root": prop(component(typeRef("Node")))
         }))
-    }),
-}
+    },
+)
